@@ -11,7 +11,7 @@ public class UserService : IUserService
         return new ApiResponse<UserDetails>
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
             ResponseObject = request,
         };
     }
@@ -21,7 +21,7 @@ public class UserService : IUserService
         return new ApiResponse
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
         };
     }
 
@@ -30,7 +30,7 @@ public class UserService : IUserService
         return new ApiResponse<UserDetails>
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
             ResponseObject = request,
         };
     }

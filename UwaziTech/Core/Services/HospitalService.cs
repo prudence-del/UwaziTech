@@ -13,7 +13,7 @@ public class HospitalService : IHospitalService
         return new ApiResponse<HospitalAdminDetails>
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
             ResponseObject = request,
         };
     }
@@ -23,7 +23,7 @@ public class HospitalService : IHospitalService
         return new ApiResponse<HospitalDetails>
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
             ResponseObject = request,
         };
     }
@@ -40,7 +40,7 @@ public class HospitalService : IHospitalService
         return new ApiResponse<HospitalModel>
         {
             StatusCode = ResponseCode.OK,
-            StatusMessage = string.Empty,
+            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
             ResponseObject = null,
         };
     }
