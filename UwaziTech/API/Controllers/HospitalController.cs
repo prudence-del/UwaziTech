@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UwaziTech.API.Model.Request;
 using UwaziTech.API.Model.Response;
+using UwaziTech.Core.Services.Interfaces;
 
 namespace UwaziTech.API.Controllers
 {
@@ -8,21 +9,30 @@ namespace UwaziTech.API.Controllers
     [Route("[controller]")]
     public class HospitalController : ControllerBase
     {
-        [HttpPost("add-hospital")]
-        public IActionResult AddHospitalDetails([FromBody] HospitalRequest request)
+        private readonly IHospitalService _service;
+        public HospitalController(IHospitalService service) 
         {
-            return Ok("Hospital Details Added Successfully");
+            _service = service;
+        }
+
+        [HttpPost("add-hospital")]
+        public async Task<IActionResult> AddHospitalDetails([FromBody] HospitalRequest request, CancellationToken token)
+        {
+            var result = await _service.AddHospitalDetailsAsync(request, token);
+
+            return Ok(result);
         }
 
         [HttpPost("add-hospital-admin")]
-        public IActionResult AddHospitalAdmin([FromBody] HospitalAdminRequest request)
+        public async Task<IActionResult> AddHospitalAdmin([FromBody] HospitalAdminRequest request, CancellationToken token)
         {
+            var result = await _service.AddHospitalAdminAsync(request, token);
 
-            return Ok("Hospital Admin Details Added Successfully");
+            return Ok(result);
         }
 
         [HttpGet("fetch-hospital-details")]
-        public IActionResult FetchHospitalDetails()
+        public IActionResult FetchHospitalDetails(CancellationToken token)
         {
             var hospital_result = new List<HospitalModel>
             {

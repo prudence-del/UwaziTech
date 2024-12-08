@@ -1,4 +1,6 @@
-﻿using UwaziTech.API.Model.Response;
+﻿using UwaziTech.API.Model.Request;
+using UwaziTech.API.Model.Response;
+using UwaziTech.Core.Models;
 using UwaziTech.Core.Models.request;
 using UwaziTech.Core.Services.Interfaces;
 
@@ -6,18 +8,40 @@ namespace UwaziTech.Core.Services;
 
 public class HospitalService : IHospitalService
 {
-    public Task AddHospitalAdminAsync(HospitalAdminDetails request, CancellationToken token)
+    public async Task<ApiResponse<HospitalAdminDetails>> AddHospitalAdminAsync(HospitalAdminDetails request, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return new ApiResponse<HospitalAdminDetails>
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+            ResponseObject = request,
+        };
     }
 
-    public Task AddHospitalDetailsAsync(HospitalDetails request, CancellationToken token)
+    public async Task<ApiResponse<HospitalDetails>> AddHospitalDetailsAsync(HospitalDetails request, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return new ApiResponse<HospitalDetails>
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+            ResponseObject = request,
+        };
     }
 
-    public Task<HospitalModel> FetchHospitalDetailsAsync(int id, CancellationToken token)
+    public async Task<ApiResponse<HospitalModel>> FetchHospitalDetailsAsync(string reference, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var response = new HospitalModel
+        {
+            Address = reference,
+            Branch = reference,
+            HospitalName = reference,
+        };
+
+        return new ApiResponse<HospitalModel>
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+            ResponseObject = null,
+        };
     }
 }
