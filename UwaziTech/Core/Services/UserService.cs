@@ -1,22 +1,37 @@
-﻿using UwaziTech.Core.Models.request;
+﻿using UwaziTech.Core.Models;
+using UwaziTech.Core.Models.request;
 using UwaziTech.Core.Services.Interfaces;
 
 namespace UwaziTech.Core.Services;
 
 public class UserService : IUserService
 {
-    public Task AddUserAsync(UserDetails request, CancellationToken token)
+    public async Task<ApiResponse<UserDetails>> AddUserAsync(UserDetails request, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return new ApiResponse<UserDetails>
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+            ResponseObject = request,
+        };
     }
 
-    public Task PreRequestAsync(CancellationToken token)
+    public async Task<ApiResponse> PreRequestAsync(CancellationToken token)
     {
-        throw new NotImplementedException();
+        return new ApiResponse
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+        };
     }
 
-    public Task UpdateUserDetailsAsync(UserDetails request, CancellationToken token)
+    public async Task<ApiResponse<UserDetails>> UpdateUserDetailsAsync(UserDetails request, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return new ApiResponse<UserDetails>
+        {
+            StatusCode = ResponseCode.OK,
+            StatusMessage = string.Empty,
+            ResponseObject = request,
+        };
     }
 }
