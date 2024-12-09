@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using UwaziTech.Core.Models.request;
+﻿using UwaziTech.Core.Models.request;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UwaziTech.API.Model.Request
 {

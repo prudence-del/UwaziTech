@@ -2,7 +2,7 @@
 {
     public class Invoice
     {
-        public string? PolicyNumber { get; set; }
         public string? PatientName { get; set; }
+        public string? PolicyNumber { get; set; }
     }
 }

@@ -1,14 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using UwaziTech.Core.Models.request;
+﻿using UwaziTech.Core.Models.request;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UwaziTech.API.Model.Request
 {
     public class AdminRequest
     {
-        public string? Username { get; set; }
         public string? Role { get; set; }
-        public string? InsuranceName { get; set; }
+        public string? Username { get; set; }
         public string? Password { get; set; }
+        public string? InsuranceName { get; set; }
 
         public static implicit operator AdminDetails([NotNull] AdminRequest request)
         {

@@ -1,21 +1,21 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using UwaziTech.Core.Models.request;
+﻿using UwaziTech.Core.Models.request;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UwaziTech.API.Model.Request
 {
     public class HospitalRequest
     {
-        public string? HospitalName { get; set; }
-        public string? Address { get; set; }
         public string? Branch { get; set; }
+        public string? Address { get; set; }
+        public string? HospitalName { get; set; }
 
         public static implicit operator HospitalDetails([NotNull] HospitalRequest request)
         {
             return new HospitalDetails
             {
-                HospitalName = request.HospitalName,
-                Address = request.Address,
                 Branch = request.Branch,
+                Address = request.Address,
+                HospitalName = request.HospitalName,
             };
         }
     }
