@@ -43,9 +43,50 @@ namespace UwaziTech.Migrations
                     b.ToTable("AdminDetail");
                 });
 
+            modelBuilder.Entity("UwaziTech.Core.Models.request.HospitalAdminDetails", b =>
+                {
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Hospital")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Reference");
+
+                    b.ToTable("HospitalAdminDetail");
+                });
+
+            modelBuilder.Entity("UwaziTech.Core.Models.request.HospitalDetails", b =>
+                {
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Branch")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HospitalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Reference");
+
+                    b.ToTable("HospitalDetail");
+                });
+
             modelBuilder.Entity("UwaziTech.Core.Models.request.InsuranceDetails", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("Reference")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
@@ -57,7 +98,7 @@ namespace UwaziTech.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Reference");
 
                     b.ToTable("InsuranceDetail");
                 });
@@ -76,6 +117,25 @@ namespace UwaziTech.Migrations
                     b.HasKey("Reference");
 
                     b.ToTable("InvoiceDetails");
+                });
+
+            modelBuilder.Entity("UwaziTech.Core.Models.request.UserDetails", b =>
+                {
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BranchName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Reference");
+
+                    b.ToTable("UserDetail");
                 });
 #pragma warning restore 612, 618
         }

@@ -37,9 +37,9 @@ namespace UwaziTech.API.Controllers
         }
 
         [HttpGet("get-insurance-details")]
-        public async Task<IActionResult> GetInsuranceDetails(string id, CancellationToken token) 
+        public async Task<IActionResult> GetInsuranceDetails(string reference, CancellationToken token) 
         {
-            var result = await _insuranceService.GetInsuranceDetailsAsync(id, token);
+            var result = await _insuranceService.GetInsuranceDetailsAsync(reference, token);
             return Ok(result);
         }
 

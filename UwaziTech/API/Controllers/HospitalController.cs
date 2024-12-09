@@ -32,60 +32,9 @@ namespace UwaziTech.API.Controllers
         }
 
         [HttpGet("fetch-hospital-details")]
-        public IActionResult FetchHospitalDetails(CancellationToken token)
+        public async Task<IActionResult> FetchHospitalDetails(string reference, CancellationToken token)
         {
-            var hospital_result = new List<HospitalModel>
-            {
-                new HospitalModel
-                {
-                    Address = "the address",
-                    Branch = "nairobi branch",
-                    HospitalName = "Mp shah"
-                },
-                new HospitalModel
-                {
-                    Address = "another address",
-                    Branch = "kisumu branch",
-                    HospitalName = "Aga Khan"
-                },
-                new HospitalModel
-                {
-                    Address = "yet another address",
-                    Branch = "mombasa branch",
-                    HospitalName = "Coast General"
-                }
-            };
-
-            var hospital_admin = new List<HospitalAdminModel>
-            {
-                new HospitalAdminModel
-                {
-                    Hospital = "Mp Shah",
-                    Username = "Hosp Admin",
-                    Role = "Admin",
-                    Password = "****"
-                },
-                new HospitalAdminModel
-                {
-                    Hospital = "Aga Khan",
-                    Username = "Admin1",
-                    Role = "Super Admin",
-                    Password = "****"
-                },
-                new HospitalAdminModel
-                {
-                    Hospital = "Coast General",
-                    Username = "Manager",
-                    Role = "Manager",
-                    Password = "****"
-                }
-            };
-
-            var result = new FetchHospitalDetailsModel
-            {
-                HospitalAdmins = hospital_admin,
-                HospitalModels = hospital_result
-            };
+            var result = await _service.FetchHospitalDetailsAsync(reference, token);
 
             return Ok(result);
         }

@@ -100,9 +100,9 @@ namespace UwaziTech.Core.Services
             };
         }
 
-        public async Task<ApiResponse<InsuranceModel>> GetInsuranceDetailsAsync(string id, CancellationToken token)
+        public async Task<ApiResponse<InsuranceModel>> GetInsuranceDetailsAsync(string reference, CancellationToken token)
         {
-            var details = await _appDbContext.InsuranceDetail.Where(e => e.Reference == id).FirstOrDefaultAsync();
+            var details = await _appDbContext.InsuranceDetail.Where(e => e.Reference == reference).FirstOrDefaultAsync();
 
             if (details != null)
             {

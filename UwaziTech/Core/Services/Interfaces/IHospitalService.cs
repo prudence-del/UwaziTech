@@ -7,7 +7,7 @@ namespace UwaziTech.Core.Services.Interfaces;
 
 public interface IHospitalService
 {
-    Task<ApiResponse<HospitalModel>> FetchHospitalDetailsAsync(string reference, CancellationToken token);
     Task<ApiResponse<HospitalDetails>> AddHospitalDetailsAsync(HospitalDetails request, CancellationToken token);
+    Task<ApiResponse<FetchHospitalDetailsModel>> FetchHospitalDetailsAsync(string reference, CancellationToken token);
     Task<ApiResponse<HospitalAdminDetails>> AddHospitalAdminAsync(HospitalAdminDetails request, CancellationToken token);
 }
