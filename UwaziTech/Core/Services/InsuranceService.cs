@@ -20,10 +20,9 @@ namespace UwaziTech.Core.Services
         public async Task<ApiResponse<AdminDetails>> AddInsuranceAdminAsync(AdminDetails request, CancellationToken token)
         {
             _appDbContext.AdminDetail.Add(request);
+            var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-            var result = await _appDbContext.SaveChangesAsync(token);
-
-            if (result > 0) 
+            if (!result) 
             {
                 return new ApiResponse<AdminDetails>
                 {
@@ -46,10 +45,9 @@ namespace UwaziTech.Core.Services
         public async Task<ApiResponse<InsuranceDetails>> AddInsuranceDetailsAsync(InsuranceDetails request, CancellationToken token)
         {
             _appDbContext.InsuranceDetail.Add(request);
+            var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-            var result = await _appDbContext.SaveChangesAsync(token);
-
-            if (result > 0) //result contains no. of rows affected
+            if (result)
             {
                 return new ApiResponse<InsuranceDetails>
                 {
@@ -73,7 +71,6 @@ namespace UwaziTech.Core.Services
         public async Task<ApiResponse<AdminModel>> GetAdminDetailsAsync(string reference, CancellationToken token)
         {
             var details = await _appDbContext.AdminDetail.Where(e => e.Reference == reference).FirstOrDefaultAsync();
-            await _appDbContext.SaveChangesAsync(token);
 
             if (details != null)
             {
@@ -106,7 +103,6 @@ namespace UwaziTech.Core.Services
         public async Task<ApiResponse<InsuranceModel>> GetInsuranceDetailsAsync(string id, CancellationToken token)
         {
             var details = await _appDbContext.InsuranceDetail.Where(e => e.Id == id).FirstOrDefaultAsync();
-            await _appDbContext.SaveChangesAsync(token);
 
             if (details != null)
             {
@@ -149,10 +145,9 @@ namespace UwaziTech.Core.Services
         public async Task<ApiResponse<InvoiceDetails>> UploadInvoiceAsync(InvoiceDetails request, CancellationToken token)
         {
             _appDbContext.InvoiceDetails.Add(request);
+            var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-            var result = await _appDbContext.SaveChangesAsync(token);
-
-            if (result > 0) //result contains no. of rows affected (should be greater than 0)
+            if (result)
             {
                 return new ApiResponse<InvoiceDetails>
                 {

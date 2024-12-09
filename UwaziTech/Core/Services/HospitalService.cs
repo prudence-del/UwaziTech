@@ -20,7 +20,7 @@ public class HospitalService : IHospitalService
         
         var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-        if (!result)
+        if (result)
         {
             return new ApiResponse<HospitalAdminDetails>
             {
@@ -46,7 +46,7 @@ public class HospitalService : IHospitalService
 
         var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-        if (!result)
+        if (result)
         {
             return new ApiResponse<HospitalDetails>
             {
