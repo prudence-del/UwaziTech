@@ -13,9 +13,9 @@ namespace UwaziTech.Core.Models.request
         {
             return new InsuranceModel
             {
-                Id = insuranceDetails.Reference,
                 Name = insuranceDetails.Name,
                 Address = insuranceDetails.Address,
+                Reference = insuranceDetails.Reference,
                 PhoneNumber = insuranceDetails.PhoneNumber,
             };
         }
