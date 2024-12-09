@@ -1,9 +1,9 @@
-﻿using UwaziTech.API.Model.Request;
+﻿using UwaziTech.Core.Models;
 using UwaziTech.API.Model.Response;
-using UwaziTech.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using UwaziTech.Core.Models.request;
-using UwaziTech.Core.Services.Interfaces;
 using UwaziTech.Infrastructure.Context;
+using UwaziTech.Core.Services.Interfaces;
 
 namespace UwaziTech.Core.Services;
 
@@ -34,7 +34,7 @@ public class HospitalService : IHospitalService
             return new ApiResponse<HospitalAdminDetails>
             {
                 StatusCode = ResponseCode.FAILED,
-                StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
+                StatusMessage = StatusMessage.DB_ADD_UNSUCCESSFUL,
                 ResponseObject = request,
             };
         }
@@ -42,28 +42,50 @@ public class HospitalService : IHospitalService
 
     public async Task<ApiResponse<HospitalDetails>> AddHospitalDetailsAsync(HospitalDetails request, CancellationToken token)
     {
-        return new ApiResponse<HospitalDetails>
+        _appDbContext.HospitalDetail.Add(request);
+
+        var result = await _appDbContext.SaveChangesAsync(token) > 0;
+
+        if (!result)
         {
-            StatusCode = ResponseCode.OK,
-            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
-            ResponseObject = request,
-        };
+            return new ApiResponse<HospitalDetails>
+            {
+                StatusCode = ResponseCode.OK,
+                StatusMessage = StatusMessage.DB_ADD_SUCCESSFUL,
+                ResponseObject = request,
+            };        
+        }
+        else
+        {
+            return new ApiResponse<HospitalDetails>
+            {
+                StatusCode = ResponseCode.FAILED,
+                StatusMessage = StatusMessage.DB_ADD_UNSUCCESSFUL,
+                ResponseObject = request,
+            };
+        }
     }
 
     public async Task<ApiResponse<HospitalModel>> FetchHospitalDetailsAsync(string reference, CancellationToken token)
     {
-        var response = new HospitalModel
+        var result = await _appDbContext.HospitalDetail.Where(e => e.Reference == reference).FirstOrDefaultAsync();
+        
+        if (result != null)
         {
-            Address = reference,
-            Branch = reference,
-            HospitalName = reference,
-        };
-
-        return new ApiResponse<HospitalModel>
+            return new ApiResponse<HospitalModel>
+            {
+                StatusCode = ResponseCode.OK,
+                StatusMessage = StatusMessage.RECORD_FOUND,
+                ResponseObject = result
+            };
+        }
+        else
         {
-            StatusCode = ResponseCode.OK,
-            StatusMessage = StatusMessage.PENDING_IMPLEMENTATION,
-            ResponseObject = null,
-        };
+            return new ApiResponse<HospitalModel>
+            {
+                StatusCode = ResponseCode.OK,
+                StatusMessage = StatusMessage.RECORD_MISSING,
+            };
+        }        
     }
 }
