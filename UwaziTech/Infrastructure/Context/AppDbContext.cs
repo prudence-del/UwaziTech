@@ -13,6 +13,10 @@ namespace UwaziTech.Infrastructure.Context
         public DbSet<AdminDetails> AdminDetail { get; set; }
         public DbSet<InsuranceDetails> InsuranceDetail { get; set; }
         public DbSet<InvoiceDetails> InvoiceDetails { get; set; }
+        
+        public DbSet<HospitalDetails> HospitalDetail { get; set; }
+        
+        public DbSet<HospitalAdminDetails> HospitalAdminDetail { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,6 +24,8 @@ namespace UwaziTech.Infrastructure.Context
             modelBuilder.Entity<InsuranceDetails>().HasKey(e => e.Id);
             modelBuilder.Entity<AdminDetails>().HasKey(e => e.Reference);
             modelBuilder.Entity<InvoiceDetails>().HasKey(e => e.Reference);
+            modelBuilder.Entity<HospitalDetails>().HasKey(e => e.Reference);
+            modelBuilder.Entity<HospitalAdminDetails>().HasKey(e => e.Reference);
         }
     }
 }

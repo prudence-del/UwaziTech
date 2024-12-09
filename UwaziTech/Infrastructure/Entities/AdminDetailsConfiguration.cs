@@ -9,6 +9,7 @@ public class AdminDetailsConfiguration : IEntityTypeConfiguration<AdminDetails>
     public void Configure(EntityTypeBuilder<AdminDetails> builder)
     {
         builder.HasKey(u => u.Reference);
+        
         builder.Property(u => u.Role).HasMaxLength(30);
         builder.Property(u => u.Username).HasMaxLength(30);
         builder.Property(u => u.Password).HasMaxLength(15);
