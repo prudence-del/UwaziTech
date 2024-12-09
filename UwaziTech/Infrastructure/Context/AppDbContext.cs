@@ -23,7 +23,7 @@ namespace UwaziTech.Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserDetails>().Property(x => x.Reference);
-            modelBuilder.Entity<InsuranceDetails>().HasKey(e => e.Id);
+            modelBuilder.Entity<InsuranceDetails>().HasKey(e => e.Reference);
             modelBuilder.Entity<AdminDetails>().HasKey(e => e.Reference);
             modelBuilder.Entity<InvoiceDetails>().HasKey(e => e.Reference);
             modelBuilder.Entity<HospitalDetails>().HasKey(e => e.Reference);

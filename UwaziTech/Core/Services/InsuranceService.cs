@@ -102,7 +102,7 @@ namespace UwaziTech.Core.Services
 
         public async Task<ApiResponse<InsuranceModel>> GetInsuranceDetailsAsync(string id, CancellationToken token)
         {
-            var details = await _appDbContext.InsuranceDetail.Where(e => e.Id == id).FirstOrDefaultAsync();
+            var details = await _appDbContext.InsuranceDetail.Where(e => e.Reference == id).FirstOrDefaultAsync();
 
             if (details != null)
             {

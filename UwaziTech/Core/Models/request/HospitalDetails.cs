@@ -7,7 +7,8 @@ namespace UwaziTech.Core.Models.request
         public string? Branch { get; set; }
         public string? Address { get; set; }
         public string? HospitalName { get; set; }
-        public string? Reference { get; set; } = Guid.NewGuid().ToString("N");
+        public string Reference { get; set; } = Guid.NewGuid().ToString("N");
+
         public static implicit operator HospitalModel(HospitalDetails hospitalDetails)
         {
             return new()
