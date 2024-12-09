@@ -4,14 +4,14 @@ using UwaziTech.Core.Models.request;
 
 namespace UwaziTech.Infrastructure.Entities;
 
-public class InsuranceDetailsConfiguration : IEntityTypeConfiguration<UserDetails>
+public class InsuranceDetailsConfiguration : IEntityTypeConfiguration<InsuranceDetails>
 {
-    public void Configure(EntityTypeBuilder<UserDetails> builder)
+    public void Configure(EntityTypeBuilder<InsuranceDetails> builder)
     {
         builder.HasKey(u => u.Id);
 
-        builder.Property(u => u.Username).HasMaxLength(30);
-        builder.Property(u => u.Password).HasMaxLength(15);
-        builder.Property(u => u.BranchName).HasMaxLength(30);
+        builder.Property(u => u.Name).HasMaxLength(30);
+        builder.Property(u => u.Address).HasMaxLength(15);
+        builder.Property(u => u.PhoneNumber).HasMaxLength(30);
     }
 }

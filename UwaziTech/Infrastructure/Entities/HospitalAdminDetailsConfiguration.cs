@@ -10,8 +10,8 @@ public class HospitalAdminDetailsConfiguration : IEntityTypeConfiguration<Hospit
     {
         builder.HasKey(x => x.Reference);
         
-        builder.Property(x => x.Hospital).HasMaxLength(100);
         builder.Property(x => x.Role).HasMaxLength(100);
+        builder.Property(x => x.Hospital).HasMaxLength(100);
         builder.Property(x => x.Username).HasMaxLength(100);
         builder.Property(x => x.Password).HasMaxLength(100);
     }
