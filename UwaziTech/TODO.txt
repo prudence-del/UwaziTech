@@ -1,0 +1,14 @@
+﻿Run the following commands:
+    - cloudbuild deploy: 
+        - gcloud builds submit --config cloudbuild.yaml .
+    
+    - dockerfile deploy:
+        - build docker image:
+            - docker build -t my-dotnet-app:v1 .
+        - verify the image:
+            - docker images
+        - run the container
+            - docker run -d -p 8080:80 my-dotnet-app:v1
+
+
+        
