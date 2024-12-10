@@ -19,12 +19,9 @@ builder.Services.AddTransient<IHospitalService, HospitalService>();
 builder.Services.AddTransient<IInsuranceService, InsuranceService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//var conn = "Server=localhost;Database=insurancestore;User ID=sa;Password=p@55w0rd!;MultipleActiveResultSets=True;TrustServerCertificate=True;";
-var conn = "Server=34.35.76.8;Database=insurancestore;User ID=sqlserver;Password=p@55w0rd!;MultipleActiveResultSets=True;TrustServerCertificate=True;";
-
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(conn)
+    options.UseSqlServer(connectionString)
 );
 
 
