@@ -3,33 +3,38 @@ using Microsoft.EntityFrameworkCore;
 using UwaziTech.Core.Services;
 using UwaziTech.Core.Services.Interfaces;
 using UwaziTech.Infrastructure.Context;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configure appsettings.json location (Custom Path)
+builder.Configuration
+    .SetBasePath(Path.Combine(AppContext.BaseDirectory, "API")) // Point to the API folder
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
 
+// Add services to the container
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//register services & lifetime
+// Register services & lifetimes
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IHospitalService, HospitalService>();
 builder.Services.AddTransient<IInsuranceService, InsuranceService>();
 
+// Use connection string from appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var conn = "Server=localhost;Database=insurancestore;User ID=sa;Password=p@55w0rd!;MultipleActiveResultSets=True;TrustServerCertificate=True;";
 
-
+// Register AppDbContext with the connection string
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(conn)
+    options.UseSqlServer(connectionString)
 );
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
