@@ -9,6 +9,12 @@
             - docker images
         - run the container
             - docker run -d -p 8080:80 my-dotnet-app:v1
+            
+Remove appsetting Git tracking
+    - git rm --cached appsettings.json
+    - git commit -m "Remove appsettings.json from tracking"
+    - git push
+    - git status
 
 
         
