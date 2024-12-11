@@ -1,23 +1,31 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+﻿# Use the official .NET SDK image for build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+
+# Set the working directory inside the container
 WORKDIR /src
-COPY ["UwaziTech/UwaziTech.csproj", "UwaziTech/"]
-RUN dotnet restore "UwaziTech/UwaziTech.csproj"
+
+# Copy the project file and restore dependencies
+COPY ["UwaziTech.csproj", "./"]
+RUN dotnet restore
+
+# Copy the rest of the application files
 COPY . .
-WORKDIR "/src/UwaziTech"
-RUN dotnet build "UwaziTech.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "UwaziTech.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+# Build the application in Release mode
+RUN dotnet publish -c Release -o /app
 
-FROM base AS final
+# Use a smaller runtime image for deployment
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+# Set the working directory for the runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
+
+# Copy the published output from the build stage
+COPY --from=build /app .
+
+# Expose the port on which the app will run
+EXPOSE 80
+EXPOSE 443
+
+# Set the entry point for the container
 ENTRYPOINT ["dotnet", "UwaziTech.dll"]

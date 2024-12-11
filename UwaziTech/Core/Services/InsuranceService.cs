@@ -19,10 +19,10 @@ namespace UwaziTech.Core.Services
 
         public async Task<ApiResponse<AdminDetails>> AddInsuranceAdminAsync(AdminDetails request, CancellationToken token)
         {
-            _appDbContext.AdminDetail.Add(request);
+            await _appDbContext.AdminDetail.AddAsync(request);
             var result = await _appDbContext.SaveChangesAsync(token) > 0;
 
-            if (!result) 
+            if (result) 
             {
                 return new ApiResponse<AdminDetails>
                 {

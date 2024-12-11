@@ -18,6 +18,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IHospitalService, HospitalService>();
 builder.Services.AddTransient<IInsuranceService, InsuranceService>();
 
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
