@@ -29,6 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+ //we will comment on this because in production, swagger will not show
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
